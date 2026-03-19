@@ -1,50 +1,16 @@
 import { useState } from "react";
-import lodash from "lodash";
 
-const BingoCard = ({ allBingoCards, setAllBingoCards, index }) => {
-  // component-specific, non state-value copy of allBingoCards
-  const cardsCopy = [...allBingoCards];
-  console.log("cardsCopy:", cardsCopy);
-  console.log("index:", index);
-
+const BingoCard = ({
+  index,
+  handleDelete,
+  bColumn,
+  iColumn,
+  nColumn,
+  gColumn,
+  oColumn,
+}) => {
   // state values
-  // TODO: Figure out a way to prevent duplicate numbers in columns
   const [cardName, setCardName] = useState("New Player");
-  const [bColumn, setBColumn] = useState([
-    lodash.random(1, 15),
-    lodash.random(1, 15),
-    lodash.random(1, 15),
-    lodash.random(1, 15),
-    lodash.random(1, 15),
-  ]);
-  const [iColumn, setIColumn] = useState([
-    lodash.random(16, 30),
-    lodash.random(16, 30),
-    lodash.random(16, 30),
-    lodash.random(16, 30),
-    lodash.random(16, 30),
-  ]);
-  const [nColumn, setNColumn] = useState([
-    lodash.random(31, 45),
-    lodash.random(31, 45),
-    0,
-    lodash.random(31, 45),
-    lodash.random(31, 45),
-  ]);
-  const [gColumn, setGColumn] = useState([
-    lodash.random(46, 60),
-    lodash.random(46, 60),
-    lodash.random(46, 60),
-    lodash.random(46, 60),
-    lodash.random(46, 60),
-  ]);
-  const [oColumn, setOColumn] = useState([
-    lodash.random(61, 75),
-    lodash.random(61, 75),
-    lodash.random(61, 75),
-    lodash.random(61, 75),
-    lodash.random(61, 75),
-  ]);
 
   return (
     <div>
@@ -106,7 +72,9 @@ const BingoCard = ({ allBingoCards, setAllBingoCards, index }) => {
           </tbody>
         </table>
       </div>
-      <div>{index > 0 && <button>Delete</button>}</div>
+      <div>
+        <button onClick={() => handleDelete(index)}>Delete</button>
+      </div>
     </div>
   );
 };
