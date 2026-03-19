@@ -13,54 +13,25 @@ function App() {
 
   // handler functions
   const handleAdd = () => {
-    // TODO: Figure out a way to prevent duplicate numbers in columns
+    // generate n column & splice in free space
+    const n = lodash.take(lodash.shuffle(lodash.range(31, 45)), 4);
+    n.splice(2, 0, 0);
+
     const newCard = {
-      key: allBingoCards.length,
-      index: allBingoCards.length,
-      bColumn: [
-        lodash.random(1, 15),
-        lodash.random(1, 15),
-        lodash.random(1, 15),
-        lodash.random(1, 15),
-        lodash.random(1, 15),
-      ],
-      iColumn: [
-        lodash.random(16, 30),
-        lodash.random(16, 30),
-        lodash.random(16, 30),
-        lodash.random(16, 30),
-        lodash.random(16, 30),
-      ],
-      nColumn: [
-        lodash.random(31, 45),
-        lodash.random(31, 45),
-        0,
-        lodash.random(31, 45),
-        lodash.random(31, 45),
-      ],
-      gColumn: [
-        lodash.random(46, 60),
-        lodash.random(46, 60),
-        lodash.random(46, 60),
-        lodash.random(46, 60),
-        lodash.random(46, 60),
-      ],
-      oColumn: [
-        lodash.random(61, 75),
-        lodash.random(61, 75),
-        lodash.random(61, 75),
-        lodash.random(61, 75),
-        lodash.random(61, 75),
-      ],
+      key: allBingoCards.length === 0 ? 0 : allBingoCards.at(-1).key + 1,
+      id: allBingoCards.length === 0 ? 0 : allBingoCards.at(-1).id + 1,
+      bColumn: lodash.take(lodash.shuffle(lodash.range(1, 15)), 5),
+      iColumn: lodash.take(lodash.shuffle(lodash.range(16, 30)), 5),
+      nColumn: n,
+      gColumn: lodash.take(lodash.shuffle(lodash.range(46, 60)), 5),
+      oColumn: lodash.take(lodash.shuffle(lodash.range(61, 75)), 5),
     };
 
     setAllBingoCards([...allBingoCards, newCard]);
   };
 
-  const handleDelete = (index) => {
-    const updatedBingoCards = allBingoCards.filter(
-      (card) => card.index !== index
-    );
+  const handleDelete = (id) => {
+    const updatedBingoCards = allBingoCards.filter((card) => card.id !== id);
 
     setAllBingoCards(updatedBingoCards);
   };
@@ -70,7 +41,7 @@ function App() {
     return (
       <BingoCard
         key={card.key}
-        index={card.index}
+        id={card.id}
         handleDelete={handleDelete}
         bColumn={card.bColumn}
         iColumn={card.iColumn}

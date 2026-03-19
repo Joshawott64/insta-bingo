@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const BingoCard = ({
-  index,
+  id,
   handleDelete,
   bColumn,
   iColumn,
@@ -73,7 +73,7 @@ const BingoCard = ({
         </table>
       </div>
       <div>
-        <button onClick={() => handleDelete(index)}>Delete</button>
+        <button onClick={() => handleDelete(id)}>Delete</button>
       </div>
     </div>
   );
