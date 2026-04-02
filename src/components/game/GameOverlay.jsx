@@ -1,51 +1,54 @@
 import { useState } from "react";
 import GameLog from "./GameLog";
 import GameCard from "./GameCard";
-import lodash from "lodash";
+import lodash, { set } from "lodash";
 
 const GameOverlay = ({
-  gamePlaying,
-  setGamePlaying,
+  showGameOverlay,
+  setShowGameOverlay,
   allBingoCards,
   gameMode,
 }) => {
   // state values
-  const [pauseGame, setPauseGame] = useState(true);
+  const [startGame, setStartGame] = useState(false);
   const [logText, setLogText] = useState([]);
+  const [numberPool, setNumberPool] = useState(
+    lodash.take(lodash.shuffle(lodash.range(1, 76)), 75)
+  );
   const [usedNumbers, setUsedNumbers] = useState([0]);
+  const [index, setIndex] = useState(0);
 
-  // generate number pool
-  const numberPool = lodash.take(lodash.shuffle(lodash.range(1, 76)), 75);
   console.log("numberPool:", numberPool);
-  console.log("allBingoCards:", allBingoCards);
-  // const usedNumbers = [0];
 
   // functions
-  const runBingo = () => {
-    setLogText([...logText, "STARTING BINGO..."]);
-    numberPool.forEach((num) => {
-      // usedNumbers.push(num);
-      setUsedNumbers([...usedNumbers, num]);
-      setLogText([...logText, `!!! ${num} !!!`]);
+  const runManualBingo = () => {
+    const currentNum = numberPool[index];
+    setLogText([...logText, `${currentNum} has been called...`]);
+    setUsedNumbers([...usedNumbers, currentNum]);
 
-      // only start checking cards after 4 iterations
-      if (usedNumbers.length >= 4) {
-        console.log("checking cards now");
-        allBingoCards.forEach((card) => {
-          // check columns
-          checkColumns(card);
+    if (index >= 3) {
+      console.log("checking for bingos...");
 
-          // check rows
-          checkRows(card);
+      for (let i = 0; i < allBingoCards.length; i++) {
+        const colCheck = checkColumns(allBingoCards[i]);
+        const rowCheck = checkRows(allBingoCards[i]);
+        const diagCheck = checkDiagonals(allBingoCards[i]);
 
-          // check diagonals
-          checkDiagonals(card);
-        });
+        if (colCheck || rowCheck || diagCheck) {
+          console.log(`CARD_ID: ${allBingoCards[i].id} got a BINGO!!!`);
+          setLogText([
+            ...logText,
+            `CARD_ID: ${allBingoCards[i].id} got a BINGO!!!`,
+          ]);
+        } else {
+          console.log("no bingos found...");
+          setIndex(index + 1);
+        }
       }
-    });
+    } else {
+      setIndex(index + 1);
+    }
   };
-
-  const runBlackOut = () => {};
 
   // separate functions to help with efficiency
   const checkColumns = (card) => {
@@ -58,7 +61,6 @@ const GameOverlay = ({
     ];
 
     if (result.includes(true)) {
-      setLogText([...logText, `${card.id} got a BINGO!!!`]);
       return true;
     } else {
       return false;
@@ -110,7 +112,6 @@ const GameOverlay = ({
     ];
 
     if (result.includes(true)) {
-      setLogText([...logText, `${card.id} got a BINGO!!!`]);
       return true;
     } else {
       return false;
@@ -139,7 +140,6 @@ const GameOverlay = ({
     ];
 
     if (result.includes(true)) {
-      setLogText([...logText, `${card.id} got a BINGO!!!`]);
       return true;
     } else {
       return false;
@@ -163,7 +163,20 @@ const GameOverlay = ({
   return (
     <div>
       <h1>GAME OVERLAY</h1>
-      <button onClick={() => runBingo()}>START</button>
+      {!startGame && (
+        <button
+          onClick={() => {
+            setStartGame(true);
+            runManualBingo(index);
+          }}
+        >
+          START
+        </button>
+      )}
+
+      {startGame && (
+        <button onClick={() => runManualBingo(index)}>NEXT NUMBER</button>
+      )}
       {cardElements}
       <GameLog logText={logText} />
     </div>

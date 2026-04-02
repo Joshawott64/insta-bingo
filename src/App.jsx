@@ -9,10 +9,8 @@ function App() {
   // state values
   const [showAbout, setShowAbout] = useState(false);
   const [gameMode, setGameMode] = useState("bingo");
-  const [gamePlaying, setGamePlaying] = useState(false);
+  const [showGameOverlay, setShowGameOverlay] = useState(false);
   const [allBingoCards, setAllBingoCards] = useState([]);
-
-  console.log("typeof allBingoCards:", typeof allBingoCards);
 
   // handler functions
   const handleAdd = () => {
@@ -56,43 +54,47 @@ function App() {
   return (
     <>
       <Navbar />
-      {gamePlaying && (
+      {showGameOverlay && (
         <GameOverlay
-          gamePlaying={gamePlaying}
-          setGamePlaying={setGamePlaying}
+          showGameOverlay={showGameOverlay}
+          setShowGameOverlay={setShowGameOverlay}
           allBingoCards={allBingoCards}
           gameMode={gameMode}
         />
       )}
-      {allBingoCards.length > 0 && (
-        <button onClick={() => setGamePlaying(true)}>PLAY</button>
+      {!showGameOverlay && (
+        <>
+          {allBingoCards.length > 0 && (
+            <button onClick={() => setShowGameOverlay(true)}>PLAY</button>
+          )}
+          <div>
+            <p>Current mode: {gameMode}</p>
+            <label>
+              <input
+                type="radio"
+                name="gameMode"
+                value="bingo"
+                defaultChecked
+                onChange={(e) => setGameMode(e.target.value)}
+              />
+              Bingo
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="gameMode"
+                value="blackout"
+                onChange={(e) => setGameMode(e.target.value)}
+              />
+              Blackout
+            </label>
+          </div>
+          <div>
+            <button onClick={(e) => handleAdd()}>Add Card</button>
+          </div>
+          {cardElements}
+        </>
       )}
-      <div>
-        <p>Current mode: {gameMode}</p>
-        <label>
-          <input
-            type="radio"
-            name="gameMode"
-            value="bingo"
-            defaultChecked
-            onChange={(e) => setGameMode(e.target.value)}
-          />
-          Bingo
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="gameMode"
-            value="blackout"
-            onChange={(e) => setGameMode(e.target.value)}
-          />
-          Blackout
-        </label>
-      </div>
-      <div>
-        <button onClick={(e) => handleAdd()}>Add Card</button>
-      </div>
-      {cardElements}
     </>
   );
 }
