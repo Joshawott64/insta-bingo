@@ -50,6 +50,31 @@ const GameOverlay = ({
     }
   };
 
+  const runManualBlackout = () => {
+    const currentNum = numberPool[index];
+    setLogText([...logText, `${currentNum} has been called...`]);
+    setUsedNumbers([...usedNumbers, currentNum]);
+
+    if (index >= 23) {
+      console.log("checking for blackouts...");
+
+      for (let i = 0; i < allBingoCards.length; i++) {
+        if (checkBlackOut(allBingoCards[i])) {
+          console.log(`CARD_ID: ${allBingoCards[i].id} got a BLACKOUT!!!`);
+          setLogText([
+            ...logText,
+            `CARD_ID: ${allBingoCards[i].id} got a BLACKOUT!!!`,
+          ]);
+        } else {
+          console.log("no blackouts found...");
+          setIndex(index + 1);
+        }
+      }
+    } else {
+      setIndex(index + 1);
+    }
+  };
+
   // separate functions to help with efficiency
   const checkColumns = (card) => {
     const result = [
@@ -146,6 +171,19 @@ const GameOverlay = ({
     }
   };
 
+  const checkBlackOut = (card) => {
+    console.log("card:", card);
+    const allColumns = [
+      ...card.bColumn,
+      ...card.iColumn,
+      ...card.nColumn,
+      ...card.gColumn,
+      ...card.oColumn,
+    ];
+
+    return allColumns.filter((e) => usedNumbers.includes(e)).length === 25;
+  };
+
   // map over allBingoCards
   const cardElements = allBingoCards.map((card) => (
     <GameCard
@@ -163,19 +201,32 @@ const GameOverlay = ({
   return (
     <div>
       <h1>GAME OVERLAY</h1>
-      {!startGame && (
+      {!startGame && gameMode === "bingo" && (
         <button
           onClick={() => {
             setStartGame(true);
             runManualBingo(index);
           }}
         >
-          START
+          START BINGO
+        </button>
+      )}
+      {!startGame && gameMode === "blackout" && (
+        <button
+          onClick={() => {
+            setStartGame(true);
+            runManualBlackout(index);
+          }}
+        >
+          START BLACKOUT
         </button>
       )}
 
-      {startGame && (
+      {startGame && gameMode === "bingo" && (
         <button onClick={() => runManualBingo(index)}>NEXT NUMBER</button>
+      )}
+      {startGame && gameMode === "blackout" && (
+        <button onClick={() => runManualBlackout(index)}>NEXT NUMBER</button>
       )}
       {cardElements}
       <GameLog logText={logText} />
