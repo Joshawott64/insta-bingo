@@ -1,7 +1,8 @@
 import { useState } from "react";
 import GameLog from "./GameLog";
 import GameCard from "./GameCard";
-import lodash, { set } from "lodash";
+import WinnerCard from "./WinnerCard";
+import lodash from "lodash";
 
 const GameOverlay = ({
   showGameOverlay,
@@ -17,7 +18,8 @@ const GameOverlay = ({
   );
   const [usedNumbers, setUsedNumbers] = useState([0]);
   const [index, setIndex] = useState(0);
-
+  const [winningCard, setWinningCard] = useState();
+  const [showWinner, setShowWinner] = useState(false);
   console.log("numberPool:", numberPool);
 
   // functions
@@ -35,11 +37,10 @@ const GameOverlay = ({
         const diagCheck = checkDiagonals(allBingoCards[i]);
 
         if (colCheck || rowCheck || diagCheck) {
-          console.log(`CARD_ID: ${allBingoCards[i].id} got a BINGO!!!`);
-          setLogText([
-            ...logText,
-            `CARD_ID: ${allBingoCards[i].id} got a BINGO!!!`,
-          ]);
+          console.log(`${allBingoCards[i].name} got a BINGO!!!`);
+          setLogText([...logText, `${allBingoCards[i].name} got a BINGO!!!`]);
+          setWinningCard(allBingoCards[i]);
+          setShowWinner(true);
         } else {
           console.log("no bingos found...");
           setIndex(index + 1);
@@ -60,11 +61,13 @@ const GameOverlay = ({
 
       for (let i = 0; i < allBingoCards.length; i++) {
         if (checkBlackOut(allBingoCards[i])) {
-          console.log(`CARD_ID: ${allBingoCards[i].id} got a BLACKOUT!!!`);
+          console.log(`${allBingoCards[i].name} got a BLACKOUT!!!`);
           setLogText([
             ...logText,
-            `CARD_ID: ${allBingoCards[i].id} got a BLACKOUT!!!`,
+            `${allBingoCards[i].name} got a BLACKOUT!!!`,
           ]);
+          setWinningCard(allBingoCards[i]);
+          setShowWinner(true);
         } else {
           console.log("no blackouts found...");
           setIndex(index + 1);
@@ -194,12 +197,25 @@ const GameOverlay = ({
       nColumn={card.nColumn}
       gColumn={card.gColumn}
       oColumn={card.oColumn}
+      name={card.name}
       usedNumbers={usedNumbers}
     />
   ));
 
   return (
     <div>
+      {showWinner && (
+        <WinnerCard
+          winningCard={winningCard}
+          setShowWinner={setShowWinner}
+          setNumberPool={setNumberPool}
+          setLogText={setLogText}
+          usedNumbers={usedNumbers}
+          setUsedNumbers={setUsedNumbers}
+          setShowGameOverlay={setShowGameOverlay}
+          gameMode={gameMode}
+        />
+      )}
       <h1>GAME OVERLAY</h1>
       {!startGame && gameMode === "bingo" && (
         <button

@@ -8,19 +8,12 @@ const BingoCard = ({
   nColumn,
   gColumn,
   oColumn,
+  name,
 }) => {
-  // state values
-  const [cardName, setCardName] = useState("New Player");
-
   return (
     <div>
       <div>
-        <input
-          type="text"
-          value={cardName}
-          onChange={(e) => setCardName(e.target.value)}
-        ></input>
-        <p>{cardName}'s Card</p>
+        <p>{name}'s Card</p>
       </div>
       <div>
         <table>

@@ -11,6 +11,7 @@ function App() {
   const [gameMode, setGameMode] = useState("bingo");
   const [showGameOverlay, setShowGameOverlay] = useState(false);
   const [allBingoCards, setAllBingoCards] = useState([]);
+  const [cardName, setCardName] = useState("New Player");
 
   // handler functions
   const handleAdd = () => {
@@ -26,9 +27,11 @@ function App() {
       nColumn: n,
       gColumn: lodash.take(lodash.shuffle(lodash.range(46, 61)), 5),
       oColumn: lodash.take(lodash.shuffle(lodash.range(61, 76)), 5),
+      name: cardName,
     };
 
     setAllBingoCards([...allBingoCards, newCard]);
+    setCardName("New Player");
   };
 
   const handleDelete = (id) => {
@@ -48,6 +51,7 @@ function App() {
       nColumn={card.nColumn}
       gColumn={card.gColumn}
       oColumn={card.oColumn}
+      name={card.name}
     />
   ));
 
@@ -90,7 +94,12 @@ function App() {
             </label>
           </div>
           <div>
-            <button onClick={(e) => handleAdd()}>Add Card</button>
+            <input
+              type="text"
+              value={cardName}
+              onChange={(e) => setCardName(e.target.value)}
+            ></input>
+            <button onClick={() => handleAdd()}>Add Card</button>
           </div>
           {cardElements}
         </>

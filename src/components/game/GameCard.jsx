@@ -4,10 +4,14 @@ const GameCard = ({
   nColumn,
   gColumn,
   oColumn,
+  name,
   usedNumbers,
 }) => {
   return (
     <div>
+      <div>
+        <p>{name}'s Card</p>
+      </div>
       <table>
         <thead>
           <tr>
