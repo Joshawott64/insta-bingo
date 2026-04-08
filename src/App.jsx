@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import GameOverlay from "./components/game/GameOverlay";
 import BingoCard from "./components/bingo_card/BingoCard";
+import About from "./components/navbar/About";
 import "./App.css";
 import lodash from "lodash";
 
@@ -57,7 +58,8 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar showAbout={showAbout} setShowAbout={setShowAbout} />
+      {showAbout && <About />}
       {showGameOverlay && (
         <GameOverlay
           showGameOverlay={showGameOverlay}
