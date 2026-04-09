@@ -57,9 +57,19 @@ function App() {
   ));
 
   return (
-    <>
+    <div className="flex flex-col h-svh w-screen justify-start font-mono">
       <Navbar showAbout={showAbout} setShowAbout={setShowAbout} />
-      {showAbout && <About />}
+      <div className="absolute z-40 w-full pt-16">
+        {showAbout && <About />}
+        <div className="flex justify-end mx-4">
+          <button
+            className="h-fit w-fit px-4 py-1 bg-cyan-400 rounded-b-sm drop-shadow-lg"
+            onClick={() => setShowAbout(!showAbout)}
+          >
+            <p className="font-bold drop-shadow-lg">About</p>
+          </button>
+        </div>
+      </div>
       {showGameOverlay && (
         <GameOverlay
           showGameOverlay={showGameOverlay}
@@ -69,23 +79,32 @@ function App() {
         />
       )}
       {!showGameOverlay && (
-        <>
+        <div className="flex flex-col justify-start place-items-center pt-8">
           {allBingoCards.length > 0 && (
             <button onClick={() => setShowGameOverlay(true)}>PLAY</button>
           )}
-          <div>
-            <p>Current mode: {gameMode}</p>
-            <label>
+          <div className="flex flex-row gap-x-4">
+            <div className="flex flex-row gap-x-2">
               <input
                 type="radio"
                 name="gameMode"
                 value="bingo"
-                defaultChecked
+                defaultChecked={gameMode === "bingo"}
                 onChange={(e) => setGameMode(e.target.value)}
               />
-              Bingo
-            </label>
-            <label>
+              <p className="drop-shadow-lg">Bingo</p>
+            </div>
+            <div className="flex flex-row gap-x-2">
+              <input
+                type="radio"
+                name="gameMode"
+                value="blackout"
+                defaultChecked={gameMode === "blackout"}
+                onChange={(e) => setGameMode(e.target.value)}
+              />
+              <p className="drop-shadow-lg">Blackout</p>
+            </div>
+            {/* <label className="drop-shadow-lg">
               <input
                 type="radio"
                 name="gameMode"
@@ -93,20 +112,23 @@ function App() {
                 onChange={(e) => setGameMode(e.target.value)}
               />
               Blackout
-            </label>
+            </label> */}
           </div>
           <div>
             <input
               type="text"
               value={cardName}
               onChange={(e) => setCardName(e.target.value)}
+              className="drop-shadow-lg"
             ></input>
-            <button onClick={() => handleAdd()}>Add Card</button>
+            <button onClick={() => handleAdd()}>
+              <p className="drop-shadow-lg">Add Card</p>
+            </button>
           </div>
           {cardElements}
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

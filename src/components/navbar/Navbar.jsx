@@ -1,8 +1,7 @@
-const Navbar = ({ showAbout, setShowAbout }) => {
+const Navbar = () => {
   return (
-    <div>
-      <p>Insta-BINGO</p>
-      <button onClick={() => setShowAbout(!showAbout)}>About</button>
+    <div className="relative z-50 flex h-16 w-full justify-center place-items-center bg-cyan-400 drop-shadow-lg">
+      <p className="font-bold text-2xl drop-shadow-lg">INSTA-BINGO</p>
     </div>
   );
 };
