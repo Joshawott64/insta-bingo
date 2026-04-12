@@ -5,6 +5,7 @@ import BingoCard from "./components/bingo_card/BingoCard";
 import About from "./components/navbar/About";
 import "./App.css";
 import lodash from "lodash";
+import { HiOutlinePencilAlt, HiPlusCircle } from "react-icons/hi";
 
 function App() {
   // state values
@@ -12,7 +13,7 @@ function App() {
   const [gameMode, setGameMode] = useState("bingo");
   const [showGameOverlay, setShowGameOverlay] = useState(false);
   const [allBingoCards, setAllBingoCards] = useState([]);
-  const [cardName, setCardName] = useState("New Player");
+  const [cardName, setCardName] = useState("New Player"); // maybe generate a random pool of names to use?
 
   // handler functions
   const handleAdd = () => {
@@ -79,12 +80,12 @@ function App() {
         />
       )}
       {!showGameOverlay && (
-        <div className="flex flex-col justify-start place-items-center pt-8">
+        <div className="flex flex-col gap-y-12 justify-start place-items-center pt-16 text-xl">
           {allBingoCards.length > 0 && (
             <button onClick={() => setShowGameOverlay(true)}>PLAY</button>
           )}
           <div className="flex flex-row gap-x-4">
-            <div className="flex flex-row gap-x-2">
+            <div className="flex flex-row gap-x-2 place-items-center">
               <input
                 type="radio"
                 name="gameMode"
@@ -94,7 +95,7 @@ function App() {
               />
               <p className="drop-shadow-lg">Bingo</p>
             </div>
-            <div className="flex flex-row gap-x-2">
+            <div className="flex flex-row gap-x-2 place-items-center">
               <input
                 type="radio"
                 name="gameMode"
@@ -104,24 +105,23 @@ function App() {
               />
               <p className="drop-shadow-lg">Blackout</p>
             </div>
-            {/* <label className="drop-shadow-lg">
-              <input
-                type="radio"
-                name="gameMode"
-                value="blackout"
-                onChange={(e) => setGameMode(e.target.value)}
-              />
-              Blackout
-            </label> */}
           </div>
-          <div>
-            <input
-              type="text"
-              value={cardName}
-              onChange={(e) => setCardName(e.target.value)}
-              className="drop-shadow-lg"
-            ></input>
-            <button onClick={() => handleAdd()}>
+          <div className="flex flex-col gap-y-4 w-full justify-center place-items-center">
+            <div className="flex flex-row justify-center place-items-center">
+              {/* TODO: Implement character limit on names. Or maybe abbreviate long names? */}
+              <input
+                type="text"
+                value={cardName}
+                onChange={(e) => setCardName(e.target.value)}
+                className="flex justify-center place-items-center h-10 w-48 px-2 py-1 text-center rounded-md border-2 border-black focus:border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-80 drop-shadow-lg"
+              ></input>
+              <HiOutlinePencilAlt className="absolute text-2xl translate-x-28" />
+            </div>
+            <button
+              className="flex flex-row gap-x-1 px-2 place-items-center bg-green-400 rounded-md text-white font-bold drop-shadow-lg"
+              onClick={() => handleAdd()}
+            >
+              <HiPlusCircle className="drop-shadow-lg" />
               <p className="drop-shadow-lg">Add Card</p>
             </button>
           </div>
