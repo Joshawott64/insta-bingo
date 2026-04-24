@@ -80,7 +80,7 @@ function App() {
         />
       )}
       {!showGameOverlay && (
-        <div className="flex flex-col gap-y-12 justify-start place-items-center pt-16 text-xl">
+        <div className="flex flex-col gap-y-12 justify-start place-items-center pt-16 text-xl mx-4">
           {allBingoCards.length > 0 && (
             <button onClick={() => setShowGameOverlay(true)}>PLAY</button>
           )}
@@ -125,7 +125,9 @@ function App() {
               <p className="drop-shadow-lg">Add Card</p>
             </button>
           </div>
-          {cardElements}
+          <div className="flex flex-col justify-center place-items-center w-full">
+            {cardElements}
+          </div>
         </div>
       )}
     </div>
