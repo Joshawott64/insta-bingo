@@ -203,7 +203,7 @@ const GameOverlay = ({
   ));
 
   return (
-    <div>
+    <div className="flex flex-col h-full w-full pt-12">
       {showWinner && (
         <WinnerCard
           winningCard={winningCard}
@@ -216,7 +216,10 @@ const GameOverlay = ({
           gameMode={gameMode}
         />
       )}
-      <h1>GAME OVERLAY</h1>
+      <div className="flex flex-row">
+        <div className="flex flex-col">{cardElements}</div>
+        <GameLog logText={logText} />
+      </div>
       {!startGame && gameMode === "bingo" && (
         <button
           onClick={() => {
@@ -244,8 +247,6 @@ const GameOverlay = ({
       {startGame && gameMode === "blackout" && (
         <button onClick={() => runManualBlackout(index)}>NEXT NUMBER</button>
       )}
-      {cardElements}
-      <GameLog logText={logText} />
     </div>
   );
 };

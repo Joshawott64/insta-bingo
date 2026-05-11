@@ -58,7 +58,7 @@ function App() {
   ));
 
   return (
-    <div className="flex flex-col h-svh w-screen justify-start font-mono">
+    <div className="flex flex-col min-h-svh w-screen justify-start pb-8 font-mono">
       <Navbar showAbout={showAbout} setShowAbout={setShowAbout} />
       <div className="absolute z-40 w-full pt-16">
         {showAbout && <About />}
@@ -80,10 +80,16 @@ function App() {
         />
       )}
       {!showGameOverlay && (
-        <div className="flex flex-col gap-y-12 justify-start place-items-center pt-16 text-xl mx-4">
-          {allBingoCards.length > 0 && (
-            <button onClick={() => setShowGameOverlay(true)}>PLAY</button>
-          )}
+        <div className="flex flex-col gap-y-6 justify-start place-items-center h-full w-full pt-12 text-xl">
+          <button
+            className={`flex flex-row gap-x-1 px-2 place-items-center rounded-md text-white font-bold drop-shadow-lg transition-all duration-200 ${
+              allBingoCards.length > 0 ? "bg-green-400" : "bg-gray-400"
+            }`}
+            disabled={allBingoCards.length === 0}
+            onClick={() => setShowGameOverlay(true)}
+          >
+            PLAY!
+          </button>
           <div className="flex flex-row gap-x-4">
             <div className="flex flex-row gap-x-2 place-items-center">
               <input
@@ -125,7 +131,7 @@ function App() {
               <p className="drop-shadow-lg">Add Card</p>
             </button>
           </div>
-          <div className="flex flex-col justify-center place-items-center w-full">
+          <div className="flex flex-col gap-y-4 justify-start place-items-center h-[360px] w-full py-2 overflow-y-scroll">
             {cardElements}
           </div>
         </div>
