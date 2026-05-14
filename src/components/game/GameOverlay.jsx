@@ -203,7 +203,7 @@ const GameOverlay = ({
   ));
 
   return (
-    <div className="flex flex-col h-full w-full pt-12">
+    <div className="flex flex-col justify-start place-items-center gap-y-6 h-full w-full pt-12">
       {showWinner && (
         <WinnerCard
           winningCard={winningCard}
@@ -216,8 +216,10 @@ const GameOverlay = ({
           gameMode={gameMode}
         />
       )}
-      <div className="flex flex-row">
-        <div className="flex flex-col">{cardElements}</div>
+      <div className="flex flex-row justify-center gap-x-6 w-full h-[525px]">
+        <div className="flex flex-col justify-start place-items-center gap-y-2 w-5/12 text-sm overflow-y-auto">
+          {cardElements}
+        </div>
         <GameLog logText={logText} />
       </div>
       {!startGame && gameMode === "bingo" && (

@@ -20,7 +20,7 @@ const BingoCard = ({
       <div className="flex flex-col gap-y-4 w-full justify-center place-items-center">
         <div className="flex flex-col justify-center place-items-center w-full">
           <p>{name}'s Card</p>
-          <div className="w-full h-1 bg-black"></div>
+          <div className="w-full h-1 bg-black rounded-lg"></div>
         </div>
         <div>
           <table className="text-center">
