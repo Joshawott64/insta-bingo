@@ -28,212 +28,187 @@ const GameCard = ({
         <tbody className="border border-black">
           <tr className="border border-black">
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(bColumn[0]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(bColumn[0]) ? (
+                <HiStar className="text-2xl place-self-center "></HiStar>
+              ) : (
+                <p>{bColumn[0]}</p>
               )}
-              <p>{bColumn[0]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(iColumn[0]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(iColumn[0]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{iColumn[0]}</p>
               )}
-              <p>{iColumn[0]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(nColumn[0]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(nColumn[0]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{nColumn[0]}</p>
               )}
-              <p>{nColumn[0]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(gColumn[0]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(gColumn[0]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{gColumn[0]}</p>
               )}
-              <p>{gColumn[0]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(oColumn[0]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(oColumn[0]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{oColumn[0]}</p>
               )}
-              <p>{oColumn[0]}</p>
             </td>
           </tr>
           <tr className="border border-black">
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(bColumn[1]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(bColumn[1]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{bColumn[1]}</p>
               )}
-              <p>{bColumn[1]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(iColumn[1]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(iColumn[1]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{iColumn[1]}</p>
               )}
-              <p>{iColumn[1]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(nColumn[1]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(nColumn[1]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{nColumn[1]}</p>
               )}
-              <p>{nColumn[1]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(gColumn[1]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(gColumn[1]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{gColumn[1]}</p>
               )}
-              <p>{gColumn[1]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(oColumn[1]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(oColumn[1]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{oColumn[1]}</p>
               )}
-              <p>{oColumn[1]}</p>
             </td>
           </tr>
           <tr className="border border-black">
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(bColumn[2]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(bColumn[2]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{bColumn[2]}</p>
               )}
-              <p>{bColumn[2]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(iColumn[2]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(iColumn[2]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{iColumn[2]}</p>
               )}
-              <p>{iColumn[2]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(nColumn[2]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(nColumn[2]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{nColumn[2]}</p>
               )}
-              <p className="text-xs">Free</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(gColumn[2]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(gColumn[2]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{gColumn[2]}</p>
               )}
-              <p>{gColumn[2]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(oColumn[2]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(oColumn[2]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{oColumn[2]}</p>
               )}
-              <p>{oColumn[2]}</p>
             </td>
           </tr>
           <tr className="border border-black">
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(bColumn[3]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(bColumn[3]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{bColumn[3]}</p>
               )}
-              <p>{bColumn[3]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(iColumn[3]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(iColumn[3]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{iColumn[0]}</p>
               )}
-              <p>{iColumn[3]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(nColumn[3]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(nColumn[3]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{nColumn[3]}</p>
               )}
-              <p>{nColumn[3]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(gColumn[3]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(gColumn[3]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{gColumn[3]}</p>
               )}
-              <p>{gColumn[3]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(oColumn[3]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(oColumn[3]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{oColumn[3]}</p>
               )}
-              <p>{oColumn[3]}</p>
             </td>
           </tr>
           <tr className="border border-black">
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(bColumn[4]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(bColumn[4]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{bColumn[4]}</p>
               )}
-              <p>{bColumn[4]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(iColumn[4]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(iColumn[4]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{iColumn[4]}</p>
               )}
-              <p>{iColumn[4]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(nColumn[4]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(nColumn[4]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{nColumn[4]}</p>
               )}
-              <p>{nColumn[4]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(gColumn[4]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(gColumn[4]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{gColumn[4]}</p>
               )}
-              <p>{gColumn[4]}</p>
             </td>
             <td className="h-8 w-8 border border-black">
-              {usedNumbers.includes(oColumn[4]) && (
-                <div className="absolute text-3xl">
-                  <HiStar></HiStar>
-                </div>
+              {usedNumbers.includes(oColumn[4]) ? (
+                <HiStar className="text-2xl place-self-center"></HiStar>
+              ) : (
+                <p>{oColumn[4]}</p>
               )}
-              <p>{oColumn[4]}</p>
             </td>
           </tr>
         </tbody>

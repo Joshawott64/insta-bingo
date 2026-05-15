@@ -3,6 +3,7 @@ import GameLog from "./GameLog";
 import GameCard from "./GameCard";
 import WinnerCard from "./WinnerCard";
 import lodash from "lodash";
+import { FaDove } from "react-icons/fa";
 
 const GameOverlay = ({
   showGameOverlay,
@@ -203,7 +204,7 @@ const GameOverlay = ({
   ));
 
   return (
-    <div className="flex flex-col justify-start place-items-center gap-y-6 h-full w-full pt-12">
+    <div>
       {showWinner && (
         <WinnerCard
           winningCard={winningCard}
@@ -213,42 +214,57 @@ const GameOverlay = ({
           usedNumbers={usedNumbers}
           setUsedNumbers={setUsedNumbers}
           setShowGameOverlay={setShowGameOverlay}
+          setIndex={setIndex}
           gameMode={gameMode}
         />
       )}
-      <div className="flex flex-row justify-center gap-x-6 w-full h-[525px]">
-        <div className="flex flex-col justify-start place-items-center gap-y-2 w-5/12 text-sm overflow-y-auto">
-          {cardElements}
+      <div className="flex flex-col justify-start place-items-center gap-y-6 h-full w-full pt-12">
+        <div className="flex flex-row justify-center gap-x-6 w-full h-[525px]">
+          <div className="flex flex-col justify-start place-items-center gap-y-2 w-5/12 text-sm overflow-y-auto">
+            {cardElements}
+          </div>
+          <GameLog logText={logText} />
         </div>
-        <GameLog logText={logText} />
-      </div>
-      {!startGame && gameMode === "bingo" && (
-        <button
-          onClick={() => {
-            setStartGame(true);
-            runManualBingo(index);
-          }}
-        >
-          START BINGO
-        </button>
-      )}
-      {!startGame && gameMode === "blackout" && (
-        <button
-          onClick={() => {
-            setStartGame(true);
-            runManualBlackout(index);
-          }}
-        >
-          START BLACKOUT
-        </button>
-      )}
+        {!startGame && gameMode === "bingo" && (
+          <button
+            className="px-2 rounded-md bg-green-400 text-white font-bold drop-shadow-lg"
+            onClick={() => {
+              setStartGame(true);
+              runManualBingo(index);
+            }}
+          >
+            START BINGO
+          </button>
+        )}
+        {!startGame && gameMode === "blackout" && (
+          <button
+            className="px-2 rounded-md bg-green-400 text-white font-bold drop-shadow-lg"
+            onClick={() => {
+              setStartGame(true);
+              runManualBlackout(index);
+            }}
+          >
+            START BLACKOUT
+          </button>
+        )}
 
-      {startGame && gameMode === "bingo" && (
-        <button onClick={() => runManualBingo(index)}>NEXT NUMBER</button>
-      )}
-      {startGame && gameMode === "blackout" && (
-        <button onClick={() => runManualBlackout(index)}>NEXT NUMBER</button>
-      )}
+        {startGame && gameMode === "bingo" && (
+          <button
+            className="px-2 rounded-md bg-green-400 text-white font-bold drop-shadow-lg"
+            onClick={() => runManualBingo(index)}
+          >
+            NEXT NUMBER
+          </button>
+        )}
+        {startGame && gameMode === "blackout" && (
+          <button
+            className="px-2 rounded-md bg-green-400 text-white font-bold drop-shadow-lg"
+            onClick={() => runManualBlackout(index)}
+          >
+            NEXT NUMBER
+          </button>
+        )}
+      </div>
     </div>
   );
 };

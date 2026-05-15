@@ -82,7 +82,7 @@ function App() {
       {!showGameOverlay && (
         <div className="flex flex-col gap-y-6 justify-start place-items-center h-full w-full pt-12 text-xl">
           <button
-            className={`flex flex-row gap-x-1 px-2 place-items-center rounded-md text-white font-bold drop-shadow-lg transition-all duration-200 ${
+            className={`px-2 rounded-md text-white font-bold drop-shadow-lg transition-all duration-200 ${
               allBingoCards.length > 0 ? "bg-green-400" : "bg-gray-400"
             }`}
             disabled={allBingoCards.length === 0}
