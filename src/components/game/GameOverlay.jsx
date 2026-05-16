@@ -3,6 +3,7 @@ import GameLog from "./GameLog";
 import GameCard from "./GameCard";
 import WinnerCard from "./WinnerCard";
 import lodash from "lodash";
+import { FaDove } from "react-icons/fa";
 
 const GameOverlay = ({
   showGameOverlay,
@@ -213,39 +214,57 @@ const GameOverlay = ({
           usedNumbers={usedNumbers}
           setUsedNumbers={setUsedNumbers}
           setShowGameOverlay={setShowGameOverlay}
+          setIndex={setIndex}
           gameMode={gameMode}
         />
       )}
-      <h1>GAME OVERLAY</h1>
-      {!startGame && gameMode === "bingo" && (
-        <button
-          onClick={() => {
-            setStartGame(true);
-            runManualBingo(index);
-          }}
-        >
-          START BINGO
-        </button>
-      )}
-      {!startGame && gameMode === "blackout" && (
-        <button
-          onClick={() => {
-            setStartGame(true);
-            runManualBlackout(index);
-          }}
-        >
-          START BLACKOUT
-        </button>
-      )}
+      <div className="flex flex-col justify-start place-items-center gap-y-6 h-full w-full pt-12">
+        <div className="flex flex-row justify-center gap-x-6 w-full h-[525px] 3xl:h-[1000px]">
+          <div className="lg:grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 flex flex-col justify-start place-items-center gap-y-2 md:gap-y-3 w-5/12 lg:w-1/2 p-2 text-sm md:text-base overflow-y-auto">
+            {cardElements}
+          </div>
+          <GameLog logText={logText} />
+        </div>
+        {!startGame && gameMode === "bingo" && (
+          <button
+            className="px-2 rounded-md bg-green-400 md:text-lg text-white font-bold drop-shadow-lg"
+            onClick={() => {
+              setStartGame(true);
+              runManualBingo(index);
+            }}
+          >
+            START BINGO
+          </button>
+        )}
+        {!startGame && gameMode === "blackout" && (
+          <button
+            className="px-2 rounded-md bg-green-400 md:text-lg text-white font-bold drop-shadow-lg"
+            onClick={() => {
+              setStartGame(true);
+              runManualBlackout(index);
+            }}
+          >
+            START BLACKOUT
+          </button>
+        )}
 
-      {startGame && gameMode === "bingo" && (
-        <button onClick={() => runManualBingo(index)}>NEXT NUMBER</button>
-      )}
-      {startGame && gameMode === "blackout" && (
-        <button onClick={() => runManualBlackout(index)}>NEXT NUMBER</button>
-      )}
-      {cardElements}
-      <GameLog logText={logText} />
+        {startGame && gameMode === "bingo" && (
+          <button
+            className="px-2 rounded-md bg-green-400 md:text-lg text-white font-bold drop-shadow-lg"
+            onClick={() => runManualBingo(index)}
+          >
+            NEXT NUMBER
+          </button>
+        )}
+        {startGame && gameMode === "blackout" && (
+          <button
+            className="px-2 rounded-md bg-green-400 md:text-lg text-white font-bold drop-shadow-lg"
+            onClick={() => runManualBlackout(index)}
+          >
+            NEXT NUMBER
+          </button>
+        )}
+      </div>
     </div>
   );
 };

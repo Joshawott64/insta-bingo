@@ -5,6 +5,7 @@ import BingoCard from "./components/bingo_card/BingoCard";
 import About from "./components/navbar/About";
 import "./App.css";
 import lodash from "lodash";
+import { HiOutlinePencilAlt, HiPlusCircle } from "react-icons/hi";
 
 function App() {
   // state values
@@ -12,7 +13,7 @@ function App() {
   const [gameMode, setGameMode] = useState("bingo");
   const [showGameOverlay, setShowGameOverlay] = useState(false);
   const [allBingoCards, setAllBingoCards] = useState([]);
-  const [cardName, setCardName] = useState("New Player");
+  const [cardName, setCardName] = useState("New Player"); // maybe generate a random pool of names to use?
 
   // handler functions
   const handleAdd = () => {
@@ -28,8 +29,10 @@ function App() {
       nColumn: n,
       gColumn: lodash.take(lodash.shuffle(lodash.range(46, 61)), 5),
       oColumn: lodash.take(lodash.shuffle(lodash.range(61, 76)), 5),
-      name: cardName,
+      name: cardName.replace(/^(.{10}).+/g, "$1."),
     };
+
+    console.log("newCard:", newCard);
 
     setAllBingoCards([...allBingoCards, newCard]);
     setCardName("New Player");
@@ -57,9 +60,21 @@ function App() {
   ));
 
   return (
-    <>
+    <div className="flex flex-col min-h-svh w-screen justify-start pb-8 font-mono">
       <Navbar showAbout={showAbout} setShowAbout={setShowAbout} />
-      {showAbout && <About />}
+      <div className="absolute z-40 w-full pt-16">
+        {showAbout && <About />}
+        <div className="flex justify-end mx-4 md:mx-6 lg:mx-10 3xl:mx-20">
+          <button
+            className="h-fit w-fit px-4 py-1 bg-pink-500 rounded-b-lg drop-shadow-lg"
+            onClick={() => setShowAbout(!showAbout)}
+          >
+            <p className="md:text-lg text-white font-bold drop-shadow-lg">
+              About
+            </p>
+          </button>
+        </div>
+      </div>
       {showGameOverlay && (
         <GameOverlay
           showGameOverlay={showGameOverlay}
@@ -69,44 +84,62 @@ function App() {
         />
       )}
       {!showGameOverlay && (
-        <>
-          {allBingoCards.length > 0 && (
-            <button onClick={() => setShowGameOverlay(true)}>PLAY</button>
-          )}
-          <div>
-            <p>Current mode: {gameMode}</p>
-            <label>
+        <div className="flex flex-col gap-y-6 md:gap-y-8 3xl:gap-y-10 justify-start place-items-center h-full w-full pt-12 text-xl md:text-2xl">
+          <button
+            className={`px-2 rounded-md text-white font-bold drop-shadow-lg transition-colors duration-200 ${
+              allBingoCards.length > 0 ? "bg-green-400" : "bg-gray-400"
+            }`}
+            disabled={allBingoCards.length === 0}
+            onClick={() => setShowGameOverlay(true)}
+          >
+            PLAY!
+          </button>
+          <div className="flex flex-row gap-x-4">
+            <div className="flex flex-row gap-x-2 place-items-center">
               <input
                 type="radio"
                 name="gameMode"
                 value="bingo"
-                defaultChecked
+                defaultChecked={gameMode === "bingo"}
                 onChange={(e) => setGameMode(e.target.value)}
               />
-              Bingo
-            </label>
-            <label>
+              <p className="drop-shadow-lg">Bingo</p>
+            </div>
+            <div className="flex flex-row gap-x-2 place-items-center">
               <input
                 type="radio"
                 name="gameMode"
                 value="blackout"
+                defaultChecked={gameMode === "blackout"}
                 onChange={(e) => setGameMode(e.target.value)}
               />
-              Blackout
-            </label>
+              <p className="drop-shadow-lg">Blackout</p>
+            </div>
           </div>
-          <div>
-            <input
-              type="text"
-              value={cardName}
-              onChange={(e) => setCardName(e.target.value)}
-            ></input>
-            <button onClick={() => handleAdd()}>Add Card</button>
+          <div className="flex flex-col gap-y-4 md:gap-y-6 w-full justify-center place-items-center">
+            <div className="flex flex-row justify-center place-items-center">
+              <input
+                type="text"
+                value={cardName}
+                onChange={(e) => setCardName(e.target.value)}
+                className="flex justify-center place-items-center h-10 w-48 px-2 py-1 text-center rounded-md border-2 border-black focus:border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-80 drop-shadow-lg"
+              ></input>
+              <HiOutlinePencilAlt className="absolute text-2xl md:text-3xl translate-x-28" />
+            </div>
+            <button
+              className="flex flex-row gap-x-1 px-2 place-items-center bg-green-400 rounded-md text-white font-bold drop-shadow-lg"
+              onClick={() => handleAdd()}
+            >
+              <HiPlusCircle className="drop-shadow-lg" />
+              <p className="drop-shadow-lg">Add Card</p>
+            </button>
           </div>
-          {cardElements}
-        </>
+          <div className="md:grid md:grid-cols-3 3xl:grid-cols-5 flex flex-col gap-y-4 md:gap-y-6 justify-start place-items-center h-[360px] 3xl:h-[780px] w-full py-2 overflow-y-scroll">
+            {cardElements}
+          </div>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 
