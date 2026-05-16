@@ -219,15 +219,15 @@ const GameOverlay = ({
         />
       )}
       <div className="flex flex-col justify-start place-items-center gap-y-6 h-full w-full pt-12">
-        <div className="flex flex-row justify-center gap-x-6 w-full h-[525px]">
-          <div className="flex flex-col justify-start place-items-center gap-y-2 w-5/12 text-sm overflow-y-auto">
+        <div className="flex flex-row justify-center gap-x-6 w-full h-[525px] 3xl:h-[1000px]">
+          <div className="lg:grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 flex flex-col justify-start place-items-center gap-y-2 md:gap-y-3 w-5/12 lg:w-1/2 p-2 text-sm md:text-base overflow-y-auto">
             {cardElements}
           </div>
           <GameLog logText={logText} />
         </div>
         {!startGame && gameMode === "bingo" && (
           <button
-            className="px-2 rounded-md bg-green-400 text-white font-bold drop-shadow-lg"
+            className="px-2 rounded-md bg-green-400 md:text-lg text-white font-bold drop-shadow-lg"
             onClick={() => {
               setStartGame(true);
               runManualBingo(index);
@@ -238,7 +238,7 @@ const GameOverlay = ({
         )}
         {!startGame && gameMode === "blackout" && (
           <button
-            className="px-2 rounded-md bg-green-400 text-white font-bold drop-shadow-lg"
+            className="px-2 rounded-md bg-green-400 md:text-lg text-white font-bold drop-shadow-lg"
             onClick={() => {
               setStartGame(true);
               runManualBlackout(index);
@@ -250,7 +250,7 @@ const GameOverlay = ({
 
         {startGame && gameMode === "bingo" && (
           <button
-            className="px-2 rounded-md bg-green-400 text-white font-bold drop-shadow-lg"
+            className="px-2 rounded-md bg-green-400 md:text-lg text-white font-bold drop-shadow-lg"
             onClick={() => runManualBingo(index)}
           >
             NEXT NUMBER
@@ -258,7 +258,7 @@ const GameOverlay = ({
         )}
         {startGame && gameMode === "blackout" && (
           <button
-            className="px-2 rounded-md bg-green-400 text-white font-bold drop-shadow-lg"
+            className="px-2 rounded-md bg-green-400 md:text-lg text-white font-bold drop-shadow-lg"
             onClick={() => runManualBlackout(index)}
           >
             NEXT NUMBER

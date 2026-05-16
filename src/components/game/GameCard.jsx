@@ -10,7 +10,7 @@ const GameCard = ({
   usedNumbers,
 }) => {
   return (
-    <div className="flex flex-col justify-center place-items-center gap-y-1 w-full bg-gray-200 p-2 rounded-xl drop-shadow-lg">
+    <div className="flex flex-col justify-center place-items-center gap-y-1 place-self-center w-full md:w-3/4 bg-gray-200 p-2 md:p-3 lg:p-4 rounded-xl drop-shadow-lg">
       <div className="flex flex-col justify-center place-items-center w-full">
         <p>{name}'s Card</p>
         <div className="w-full h-0.5 bg-black rounded-lg"></div>

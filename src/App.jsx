@@ -29,8 +29,10 @@ function App() {
       nColumn: n,
       gColumn: lodash.take(lodash.shuffle(lodash.range(46, 61)), 5),
       oColumn: lodash.take(lodash.shuffle(lodash.range(61, 76)), 5),
-      name: cardName,
+      name: cardName.replace(/^(.{10}).+/g, "$1."),
     };
+
+    console.log("newCard:", newCard);
 
     setAllBingoCards([...allBingoCards, newCard]);
     setCardName("New Player");
@@ -62,12 +64,14 @@ function App() {
       <Navbar showAbout={showAbout} setShowAbout={setShowAbout} />
       <div className="absolute z-40 w-full pt-16">
         {showAbout && <About />}
-        <div className="flex justify-end mx-4">
+        <div className="flex justify-end mx-4 md:mx-6 lg:mx-10 3xl:mx-20">
           <button
-            className="h-fit w-fit px-4 py-1 bg-cyan-400 rounded-b-sm drop-shadow-lg"
+            className="h-fit w-fit px-4 py-1 bg-pink-500 rounded-b-lg drop-shadow-lg"
             onClick={() => setShowAbout(!showAbout)}
           >
-            <p className="font-bold drop-shadow-lg">About</p>
+            <p className="md:text-lg text-white font-bold drop-shadow-lg">
+              About
+            </p>
           </button>
         </div>
       </div>
@@ -80,9 +84,9 @@ function App() {
         />
       )}
       {!showGameOverlay && (
-        <div className="flex flex-col gap-y-6 justify-start place-items-center h-full w-full pt-12 text-xl">
+        <div className="flex flex-col gap-y-6 md:gap-y-8 3xl:gap-y-10 justify-start place-items-center h-full w-full pt-12 text-xl md:text-2xl">
           <button
-            className={`px-2 rounded-md text-white font-bold drop-shadow-lg transition-all duration-200 ${
+            className={`px-2 rounded-md text-white font-bold drop-shadow-lg transition-colors duration-200 ${
               allBingoCards.length > 0 ? "bg-green-400" : "bg-gray-400"
             }`}
             disabled={allBingoCards.length === 0}
@@ -112,16 +116,15 @@ function App() {
               <p className="drop-shadow-lg">Blackout</p>
             </div>
           </div>
-          <div className="flex flex-col gap-y-4 w-full justify-center place-items-center">
+          <div className="flex flex-col gap-y-4 md:gap-y-6 w-full justify-center place-items-center">
             <div className="flex flex-row justify-center place-items-center">
-              {/* TODO: Implement character limit on names. Or maybe abbreviate long names? */}
               <input
                 type="text"
                 value={cardName}
                 onChange={(e) => setCardName(e.target.value)}
                 className="flex justify-center place-items-center h-10 w-48 px-2 py-1 text-center rounded-md border-2 border-black focus:border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-80 drop-shadow-lg"
               ></input>
-              <HiOutlinePencilAlt className="absolute text-2xl translate-x-28" />
+              <HiOutlinePencilAlt className="absolute text-2xl md:text-3xl translate-x-28" />
             </div>
             <button
               className="flex flex-row gap-x-1 px-2 place-items-center bg-green-400 rounded-md text-white font-bold drop-shadow-lg"
@@ -131,7 +134,7 @@ function App() {
               <p className="drop-shadow-lg">Add Card</p>
             </button>
           </div>
-          <div className="flex flex-col gap-y-4 justify-start place-items-center h-[360px] w-full py-2 overflow-y-scroll">
+          <div className="md:grid md:grid-cols-3 3xl:grid-cols-5 flex flex-col gap-y-4 md:gap-y-6 justify-start place-items-center h-[360px] 3xl:h-[780px] w-full py-2 overflow-y-scroll">
             {cardElements}
           </div>
         </div>

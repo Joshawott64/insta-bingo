@@ -11,7 +11,7 @@ const BingoCard = ({
   name,
 }) => {
   return (
-    <div className="w-3/4 bg-gray-100 p-4 rounded-2xl drop-shadow-lg">
+    <div className="w-3/4 lg:w-4/6 bg-gray-100 p-4 rounded-2xl drop-shadow-lg">
       <div className="flex flex-row justify-end w-full text-2xl">
         <button onClick={() => handleDelete(id)}>
           <HiOutlineXCircle />
