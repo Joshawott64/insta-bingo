@@ -21,7 +21,6 @@ const GameOverlay = ({
   const [index, setIndex] = useState(0);
   const [winningCard, setWinningCard] = useState();
   const [showWinner, setShowWinner] = useState(false);
-  console.log("numberPool:", numberPool);
 
   // functions
   const runManualBingo = () => {
@@ -30,20 +29,16 @@ const GameOverlay = ({
     setUsedNumbers([...usedNumbers, currentNum]);
 
     if (index >= 3) {
-      console.log("checking for bingos...");
-
       for (let i = 0; i < allBingoCards.length; i++) {
         const colCheck = checkColumns(allBingoCards[i]);
         const rowCheck = checkRows(allBingoCards[i]);
         const diagCheck = checkDiagonals(allBingoCards[i]);
 
         if (colCheck || rowCheck || diagCheck) {
-          console.log(`${allBingoCards[i].name} got a BINGO!!!`);
           setLogText([...logText, `${allBingoCards[i].name} got a BINGO!!!`]);
           setWinningCard(allBingoCards[i]);
           setShowWinner(true);
         } else {
-          console.log("no bingos found...");
           setIndex(index + 1);
         }
       }
@@ -58,11 +53,8 @@ const GameOverlay = ({
     setUsedNumbers([...usedNumbers, currentNum]);
 
     if (index >= 23) {
-      console.log("checking for blackouts...");
-
       for (let i = 0; i < allBingoCards.length; i++) {
         if (checkBlackOut(allBingoCards[i])) {
-          console.log(`${allBingoCards[i].name} got a BLACKOUT!!!`);
           setLogText([
             ...logText,
             `${allBingoCards[i].name} got a BLACKOUT!!!`,
@@ -70,7 +62,6 @@ const GameOverlay = ({
           setWinningCard(allBingoCards[i]);
           setShowWinner(true);
         } else {
-          console.log("no blackouts found...");
           setIndex(index + 1);
         }
       }
@@ -176,7 +167,6 @@ const GameOverlay = ({
   };
 
   const checkBlackOut = (card) => {
-    console.log("card:", card);
     const allColumns = [
       ...card.bColumn,
       ...card.iColumn,

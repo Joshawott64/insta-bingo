@@ -32,8 +32,6 @@ function App() {
       name: cardName.replace(/^(.{10}).+/g, "$1."),
     };
 
-    console.log("newCard:", newCard);
-
     setAllBingoCards([...allBingoCards, newCard]);
     setCardName("New Player");
   };
